@@ -21,6 +21,8 @@ const upload = multer({ storage })
 
 router.get('/', pizzaController.getallPizzas);
 
+router.get('/image/:id', pizzaController.getImage);
+
 router.post('/newpizza', upload.single('image'), pizzaController.save);
 
 router.get('/:id', pizzaController.getPizza);

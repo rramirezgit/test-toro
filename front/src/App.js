@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Pizzas from "./views/Pizzas/Pizzas";
+// import NewPizza from './views/NewPizza/NewPizza';
+// import PizzaEdit from './views/EditPizza/PizzaEdit';
+// import DetailsPizzaContainer from './views/DetailsPizza/DetailsPizzaContainer'
+import {
+  BrowserRouter as Router, Route, Switch
+} from 'react-router-dom';
+import DataProvider from './components/context/DataContext';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataProvider>
+      <div className="App">
+        <Router>
+          <Switch>
+          <Route exact path="/" component={Pizzas} />
+          {/* <Route exact path="/newPizza" component={NewPizza} /> 
+          <Route exact path="/Pizza/:PizzaId" component={DetailsPizzaContainer} /> 
+          <Route exact path="/Pizza/:PizzaId/edit" component={PizzaEdit} />  */}
+                  
+          </Switch>
+        </Router>
+      </div>
+    </DataProvider>
   );
 }
 
 export default App;
+

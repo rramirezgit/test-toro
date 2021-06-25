@@ -1,4 +1,5 @@
 const pizzasModal = require('../models/Pizzas');
+const path = require('path')
 const fs = require('fs');
 
 
@@ -36,7 +37,7 @@ const controller = {
         try {
             var name = params.name.trim()
             var price = parseFloat(params.price)
-            var fileUrl = '../uploads/' + image.filename;
+            var fileUrl = image.filename;
         } catch (err) {
             return res.status(200).send({
                 status: 'error',
@@ -114,10 +115,13 @@ const controller = {
     update: (req, res) => {
         const pizzaId = req.params.id;
         const params = req.body;
+        const image = req.file; 
+
 
         try {
             var name = params.name.trim()
             var price = parseFloat(params.price)
+            var fileUrl = image.filename;
         } catch (err) {
             return res.status(200).send({
                 status: 'error',
@@ -128,7 +132,7 @@ const controller = {
         params.ingredients ? params.ingredients = params.ingredients : params.ingredients = null;
 
         //Find and update
-        if (name && price) {
+        if (name && price && fileUrl) {
             pizzasModal.findOneAndUpdate({ _id: pizzaId }, params, { new: true }, (err, pizzaUpdate) => {
                 if (err) {
                     return res.status(500).send({
@@ -157,7 +161,21 @@ const controller = {
             });
         }
     },
+    getImage:(req, res) => {
+        const path_file = './uploads/' + req.params.id;
 
+        fs.access(path_file, (err) => {
+            if (!err) {
+                return res.sendFile(path.resolve(path_file));
+            } else {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'La imagen no existe'
+                });
+            }
+        });
+
+    },
     delete: (req, res) => {
         const pizzaId = req.params.id;
 

@@ -1,7 +1,6 @@
 const IngredientsModal = require('../models/Ingredients');
+const path = require('path')
 const fs = require('fs');
-
-
 
 const controller = {
 
@@ -28,13 +27,30 @@ const controller = {
             });
         });
     },
+    getImage:(req, res) => {
+        const path_file = './uploads/' + req.params.id;
+
+        fs.access(path_file, (err) => {
+            if (!err) {
+                return res.sendFile(path.resolve(path_file));
+            } else {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'La imagen no existe'
+                });
+            }
+        });
+
+    },
     save: (req, res) => {
         const params = req.body;
-    
+        const image = req.file; 
+      
         try {
             var name = params.name.trim()
             var price = parseFloat(params.price)
-            var fileUrl = '../uploads/' + image.filename;
+            var fileUrl = image.filename;
+            var type = params.type.trim();
         } catch (err) {
             return res.status(200).send({
                 status: 'error',
@@ -43,13 +59,14 @@ const controller = {
         }
     
        
-        if (name && price && fileUrl) {
+        if (name && price && fileUrl && type) {
             const Ingredient = new IngredientsModal();
     
             Ingredient.name = params.name;
             Ingredient.price = params.price;
             Ingredient.ingredients = params.ingredients;
             Ingredient.image = fileUrl
+            Ingredient.type = type
     
     
             Ingredient.save((err, Ingredient) => {

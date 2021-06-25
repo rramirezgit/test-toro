@@ -1,6 +1,7 @@
 const express = require("express");
 const ingredientController = require('../controllers/ingredients');
 const router = express.Router();
+const path = require('path')
 const multer = require('multer');
 
 //Set Storage
@@ -21,6 +22,8 @@ const upload = multer({ storage })
 router.get('/', ingredientController.getAllIngredients);
 
 router.post('/newingredient', upload.single('image'), ingredientController.save);
+
+router.get('/image/:id', ingredientController.getImage);
 
 router.get('/:id', ingredientController.getIngredient);
 

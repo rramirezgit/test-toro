@@ -1,0 +1,10 @@
+.containerGrid {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around
+  }
+
+.background-viewproducts {
+    background-color: rgba(211, 211, 211, 0.555);
+}

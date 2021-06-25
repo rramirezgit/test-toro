@@ -15,8 +15,9 @@ const IngredientsSchema = new Schema({
     require: [true, "Please a price"],
   },
   image: String,
+  type: String,
 }, {
-  timestamps: true 
+  timestamps: true
 });
 
 

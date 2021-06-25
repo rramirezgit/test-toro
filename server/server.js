@@ -27,8 +27,19 @@ app.use((req, res, next) => {
     next();
 })
 
+if (process.env.NODE_ENV === 'producction') {
+    app.use(express.static(path.join(__dirname, '/front/build')))
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "front", "build","index.html"))
+    })
+} else {
+    app.get("*", (req, res) => {
+        res.send("API Runinng")
+    })
+}
+
 const cors = require('cors')
 app.use(cors())
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
