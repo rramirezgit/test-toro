@@ -1,0 +1,42 @@
+.productEdit__hero {
+  width: 100%;
+  padding: 2rem 0;
+  background-repeat: repeat;
+  margin-bottom: 1rem;
+  color: #010101;
+  display: flex;
+  justify-content: center;
+}
+
+
+.background-viewproducts {
+  width: 100%;
+  padding: 7rem 0;
+  background-repeat: repeat;
+  margin-bottom: 1rem;
+}
+
+.pizzaEdit__hero{
+  width: 93%;
+  height: 22rem;
+  z-index: -1;
+  border-radius: 5%;
+  position: absolute;
+  font-size: 18vw;
+  margin-top: -5rem;
+  color: #13131314;
+}
+
+.pizzaEdit-img{
+  width: 82%;
+  height: 21rem;
+  border-radius: 5%;
+  box-shadow: -6px 6px 15px 3px  #80000c96;
+}
+
+.containerGrid {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around
+}
